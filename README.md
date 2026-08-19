@@ -8,6 +8,10 @@
 
 **WireG** is a modern, lightweight, and feature-rich desktop client for managing and connecting to **WireGuard** VPN tunnels on Linux. Designed with a **shadcn-inspired Glassmorphism UI**, WireG provides an intuitive experience with instant connections, live traffic metrics, dual-mode configuration editing, and seamless mobile QR sharing.
 
+<p align="center">
+  <img src="assets/screenshots/wireg_ui.png" alt="WireG Dashboard Screenshot" width="650">
+</p>
+
 ---
 
 ## ✨ Features
