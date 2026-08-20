@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import List, Optional
 from PyQt6.QtCore import Qt, QUrl
-from PyQt6.QtGui import QDragEnterEvent, QDropEvent, QIcon
+from PyQt6.QtGui import QDragEnterEvent, QDropEvent, QIcon, QPixmap
 from PyQt6.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -32,6 +32,9 @@ from .traffic_widget import TrafficWidget
 from .tray_icon import WireGTrayIcon, create_tray_icon_pixmap
 
 
+from ..utils.paths import get_asset_path
+
+
 class MainWindow(QMainWindow):
     """
     shadcn Glassmorphism Main Application Window for WireG.
@@ -50,6 +53,11 @@ class MainWindow(QMainWindow):
         self.search_query = ""
 
         self.setWindowTitle("WireG - WireGuard Client")
+        # Set app window icon from asset
+        icon_path = get_asset_path("icon.png")
+        if icon_path.exists():
+            self.setWindowIcon(QIcon(str(icon_path)))
+
         # Locked / Fixed Window Size as requested
         self.setFixedSize(720, 800)
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
@@ -70,13 +78,24 @@ class MainWindow(QMainWindow):
 
         # 1. Top Header Bar (shadcn glass header)
         header_layout = QHBoxLayout()
-        header_layout.setSpacing(10)
+        header_layout.setSpacing(12)
 
-        # Branding
+        # Branding with Icon
+        brand_row = QHBoxLayout()
+        brand_row.setSpacing(10)
+
+        icon_path = get_asset_path("icons/icon_64x64.png")
+        self.logo_img = QLabel()
+        self.logo_img.setFixedSize(36, 36)
+        self.logo_img.setScaledContents(True)
+        if icon_path.exists():
+            self.logo_img.setPixmap(QPixmap(str(icon_path)))
+        brand_row.addWidget(self.logo_img)
+
         brand_layout = QVBoxLayout()
         brand_layout.setSpacing(1)
 
-        logo_label = QLabel("🛡 WireG")
+        logo_label = QLabel("WireG")
         logo_label.setStyleSheet("font-size: 22px; font-weight: 900; color: #818cf8; letter-spacing: -0.5px;")
 
         sub_label = QLabel("Next-Gen WireGuard Manager")
@@ -84,7 +103,8 @@ class MainWindow(QMainWindow):
 
         brand_layout.addWidget(logo_label)
         brand_layout.addWidget(sub_label)
-        header_layout.addLayout(brand_layout)
+        brand_row.addLayout(brand_layout)
+        header_layout.addLayout(brand_row)
 
         header_layout.addStretch()
 

@@ -1,15 +1,23 @@
-# 🛡️ WireG — Modern WireGuard Client for Linux
+<p align="center">
+  <img src="assets/logo.png" alt="WireG Logo" width="150" style="border-radius: 24px;" />
+</p>
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![PyQt6](https://img.shields.io/badge/GUI-PyQt6-green.svg)](https://pypi.org/project/PyQt6/)
-[![WireGuard](https://img.shields.io/badge/protocol-WireGuard-red.svg)](https://www.wireguard.com/)
-[![Linux](https://img.shields.io/badge/platform-Linux-orange.svg)](https://kernel.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-
-**WireG** is a modern, lightweight, and feature-rich desktop client for managing and connecting to **WireGuard** VPN tunnels on Linux. Designed with a **shadcn-inspired Glassmorphism UI**, WireG provides an intuitive experience with instant connections, live traffic metrics, dual-mode configuration editing, and seamless mobile QR sharing.
+<h1 align="center">WireG — Modern WireGuard Client for Linux</h1>
 
 <p align="center">
-  <img src="assets/screenshots/wireg_ui.png" alt="WireG Dashboard Screenshot" width="650">
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+" /></a>
+  <a href="https://pypi.org/project/PyQt6/"><img src="https://img.shields.io/badge/GUI-PyQt6-green.svg" alt="PyQt6" /></a>
+  <a href="https://www.wireguard.com/"><img src="https://img.shields.io/badge/protocol-WireGuard-red.svg" alt="WireGuard" /></a>
+  <a href="https://kernel.org/"><img src="https://img.shields.io/badge/platform-Linux-orange.svg" alt="Linux" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-purple.svg" alt="MIT License" /></a>
+</p>
+
+<p align="center">
+  <b>WireG</b> is a modern, lightweight, and feature-rich desktop client for managing and connecting to <b>WireGuard</b> VPN tunnels on Linux. Designed with a <b>shadcn-inspired Glassmorphism UI</b>, WireG provides an intuitive experience with instant connections, live traffic metrics, dual-mode configuration editing, and seamless mobile QR sharing.
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/wireg_ui.png" alt="WireG Dashboard Screenshot" width="650" />
 </p>
 
 ---
@@ -106,6 +114,11 @@ WireG/
 ├── run.sh                          # Quick execution script
 ├── install.sh                      # Desktop shortcut installer
 ├── setup_permissions.sh            # One-time passwordless permission setup
+├── assets/
+│   ├── logo.png                    # Master high-res application logo
+│   ├── icon.png                    # Application icon
+│   ├── icons/                      # Multi-resolution icons (16px to 512px)
+│   └── screenshots/                # Showcase screenshots
 ├── wireg/
 │   ├── app.py                      # Application lifecycle coordinator
 │   ├── core/

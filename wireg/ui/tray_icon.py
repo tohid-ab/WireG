@@ -2,32 +2,39 @@ from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QIcon, QPixmap, QPainter, QColor
 from PyQt6.QtWidgets import QSystemTrayIcon, QMenu
 
+from ..utils.paths import get_asset_path
+
 
 def create_tray_icon_pixmap(is_connected: bool) -> QPixmap:
-    """Draws a crisp tray icon with status indicator dot."""
+    """Draws a crisp tray icon using the official WireG logo with status indicator dot."""
+    icon_path = get_asset_path("icons/icon_64x64.png")
+    
     pix = QPixmap(32, 32)
     pix.fill(Qt.GlobalColor.transparent)
 
     painter = QPainter(pix)
     painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
 
-    # Base shield / gear background
-    painter.setPen(Qt.PenStyle.NoPen)
-    painter.setBrush(QColor("#6366f1"))
-    painter.drawRoundedRect(4, 4, 24, 24, 6, 6)
-
-    # WireGuard "W" text inside icon
-    painter.setPen(QColor("#ffffff"))
-    font = painter.font()
-    font.setBold(True)
-    font.setPixelSize(14)
-    painter.setFont(font)
-    painter.drawText(0, 0, 32, 32, Qt.AlignmentFlag.AlignCenter, "W")
+    if icon_path.exists():
+        base_icon = QPixmap(str(icon_path))
+        painter.drawPixmap(0, 0, 32, 32, base_icon)
+    else:
+        # Fallback vector shield
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.setBrush(QColor("#6366f1"))
+        painter.drawRoundedRect(2, 2, 28, 28, 6, 6)
+        painter.setPen(QColor("#ffffff"))
+        font = painter.font()
+        font.setBold(True)
+        font.setPixelSize(14)
+        painter.setFont(font)
+        painter.drawText(0, 0, 32, 32, Qt.AlignmentFlag.AlignCenter, "W")
 
     # Status dot (Bottom Right)
-    dot_color = QColor("#10b981") if is_connected else QColor("#94a3b8")
+    dot_color = QColor("#10b981") if is_connected else QColor("#71717a")
     painter.setBrush(dot_color)
-    painter.setPen(QColor("#1e2230"))
+    painter.setPen(QColor("#090d16"))
     painter.drawEllipse(20, 20, 10, 10)
 
     painter.end()

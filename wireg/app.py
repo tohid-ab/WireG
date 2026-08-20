@@ -9,7 +9,7 @@ from .core.wireguard_service import WireGuardService
 from .ui.main_window import MainWindow
 from .ui.styles import DARK_THEME_QSS
 from .ui.tray_icon import create_tray_icon_pixmap
-from .utils.paths import ensure_directories
+from .utils.paths import ensure_directories, get_asset_path
 
 
 def run_app():
@@ -23,6 +23,10 @@ def run_app():
     app.setApplicationDisplayName("WireG - WireGuard Client")
     app.setOrganizationName("WireG")
     app.setQuitOnLastWindowClosed(False)
+
+    icon_path = get_asset_path("icon.png")
+    if icon_path.exists():
+        app.setWindowIcon(QIcon(str(icon_path)))
 
     # Global Font
     font = QFont("Segoe UI", 10)

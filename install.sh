@@ -9,15 +9,8 @@ mkdir -p "$APPS_DIR"
 mkdir -p "$ICON_DIR"
 chmod +x "$SCRIPT_DIR/main.py" "$SCRIPT_DIR/run.sh" "$SCRIPT_DIR/setup_permissions.sh"
 
-# Generate application icon
-python3 -c "
-from wireg.ui.tray_icon import create_tray_icon_pixmap
-from PyQt6.QtWidgets import QApplication
-import sys
-app = QApplication(sys.argv)
-pix = create_tray_icon_pixmap(False)
-pix.scaled(128, 128).save('$ICON_DIR/wireg.png')
-" 2>/dev/null || true
+# Install official application icons
+cp -f "$SCRIPT_DIR/assets/icons/icon_128x128.png" "$ICON_DIR/wireg.png" 2>/dev/null || cp -f "$SCRIPT_DIR/assets/icon.png" "$ICON_DIR/wireg.png"
 
 # Create .desktop file
 cat <<EOF > "$APPS_DIR/wireg.desktop"

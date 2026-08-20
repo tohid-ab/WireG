@@ -32,6 +32,12 @@ def get_settings_json_path() -> Path:
     return get_config_dir() / "settings.json"
 
 
+def get_asset_path(filename: str) -> Path:
+    """Returns absolute path to an asset file inside the project assets directory."""
+    project_root = Path(__file__).resolve().parent.parent.parent
+    return project_root / "assets" / filename
+
+
 def ensure_directories() -> None:
     """Ensures that all application directories exist with proper 0700 permissions."""
     get_config_dir()
